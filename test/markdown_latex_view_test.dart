@@ -45,7 +45,7 @@ a^2 + b^2 = c^2
   );
 
   testWidgets(
-    'renders unclosed streaming code block immediately as BlueCodeBox',
+    'renders unclosed streaming code block immediately as CodeSnippetBox',
     (WidgetTester tester) async {
       const String streamingCodeSample =
           'ตัวอย่างโค้ดที่กำลังพิมพ์:\n```dart\nvoid main() {\n  print("hello");';
@@ -60,14 +60,14 @@ a^2 + b^2 = c^2
         ),
       );
 
-      // ตรวจสอบว่าพบ BlueCodeBox และภาษา Dart ทันที แม้ยังไม่มี ``` ปิดท้าย
+      // ตรวจสอบว่าพบ CodeSnippetBox และภาษา Dart ทันที แม้ยังไม่มี ``` ปิดท้าย
       expect(find.text('Dart'), findsOneWidget);
       expect(find.textContaining('print("hello")'), findsOneWidget);
     },
   );
 
   testWidgets(
-    'renders streaming code blocks with complex language tags and spaces as BlueCodeBox',
+    'renders streaming code blocks with complex language tags and spaces as CodeSnippetBox',
     (WidgetTester tester) async {
       const String trickySample = '''
 คำอธิบายก่อนเริ่ม:
@@ -95,7 +95,7 @@ def hello():
         ),
       );
 
-      // ตรวจสอบว่าทั้ง dart:lib/main.dart และ python (มี space) ถูกแปลงเป็น BlueCodeBox ทั้งคู่
+      // ตรวจสอบว่าทั้ง dart:lib/main.dart และ python (มี space) ถูกแปลงเป็น CodeSnippetBox ทั้งคู่
       expect(find.text('Dart'), findsOneWidget);
       expect(find.text('Python'), findsOneWidget);
       expect(find.textContaining('dart with file path'), findsOneWidget);

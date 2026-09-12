@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 
-import 'blueai_theme.dart';
+import 'blue_ai_theme.dart';
 import 'chat_controller.dart';
 
 /// ปุ่มไอคอนสี่เหลี่ยมมุมมน (Squircle) สำหรับแถบด้านบน — เส้นขอบบาง + พื้นแบรนด์
@@ -646,17 +646,17 @@ class CodeSyntaxHighlighter {
 }
 
 /// กล่องแสดงผลโค้ด (Code Box) สไตล์โมเดิร์น คมชัดและมินิมอล
-class BlueCodeBox extends StatefulWidget {
-  const BlueCodeBox({required this.code, this.language, super.key});
+class CodeSnippetBox extends StatefulWidget {
+  const CodeSnippetBox({required this.code, this.language, super.key});
 
   final String code;
   final String? language;
 
   @override
-  State<BlueCodeBox> createState() => _BlueCodeBoxState();
+  State<CodeSnippetBox> createState() => _CodeSnippetBoxState();
 }
 
-class _BlueCodeBoxState extends State<BlueCodeBox> {
+class _CodeSnippetBoxState extends State<CodeSnippetBox> {
   bool _copied = false;
   String? _lastCode;
   String? _lastLanguage;
@@ -880,8 +880,8 @@ class _ThinkingDotsPainter extends CustomPainter {
 /// วิดเจ็ตแสดงสถานะการคิด (Chain of Thought / Reasoning):
 /// - Image 1: ย่ออยู่ -> แสดง "Thought for X seconds >"
 /// - Image 2: ขยายออก -> แสดง "Thought for X seconds ˇ" พร้อมเส้นขอบซ้ายและเนื้อหาการคิดแบบ Markdown
-class ThinkingIndicatorWidget extends StatefulWidget {
-  const ThinkingIndicatorWidget({
+class ThinkingIndicator extends StatefulWidget {
+  const ThinkingIndicator({
     required this.isThinking,
     this.thinkingSeconds,
     this.reasoningText,
@@ -895,11 +895,10 @@ class ThinkingIndicatorWidget extends StatefulWidget {
   final bool initiallyExpanded;
 
   @override
-  State<ThinkingIndicatorWidget> createState() =>
-      _ThinkingIndicatorWidgetState();
+  State<ThinkingIndicator> createState() => _ThinkingIndicatorState();
 }
 
-class _ThinkingIndicatorWidgetState extends State<ThinkingIndicatorWidget> {
+class _ThinkingIndicatorState extends State<ThinkingIndicator> {
   late bool _expanded = widget.initiallyExpanded;
 
   @override

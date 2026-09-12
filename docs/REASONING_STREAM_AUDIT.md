@@ -11,7 +11,7 @@ local behavior from hypotheses about the provider. Production code was not chang
 
 Gateway chat/completions SSE → normalizeGatewayStream → installed AI SDK
 extractReasoningMiddleware → Worker thinking/text SSE → AiGatewayService →
-CloudChatController (85 ms notification batching) → ThinkingIndicatorWidget.
+CloudChatController (85 ms notification batching) → ThinkingIndicator.
 
 The Worker saves database snapshots every 2 seconds, but emits live deltas without
 waiting for these checkpoints. Another device watching database updates can see

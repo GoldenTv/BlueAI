@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'ai_gateway_service.dart';
 import 'chat_controller.dart';
-import 'blueai_theme.dart';
+import 'blue_ai_theme.dart';
 
 /// ไดอะล็อกสำหรับการตั้งค่าระบบ BlueAI (Backend URL และรายการโมเดล AI)
 class SettingsDialog extends StatefulWidget {

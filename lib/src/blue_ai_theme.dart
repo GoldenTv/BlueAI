@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Neutral chat surfaces with blue reserved for primary actions and selections.
-class BlueAIPalette {
-  BlueAIPalette._();
+class BlueAiPalette {
+  BlueAiPalette._();
 
   // ── สีแบรนด์ ──
   static const Color accent = Color(0xFF2563EB);
@@ -47,3 +47,6 @@ class BlueAIPalette {
   /// สีข้อความบนพื้น tint — ใช้กับชิป/ปุ่มรอง
   static Color accentText(bool isDark) => isDark ? accentSoft : accentDeep;
 }
+
+/// Backwards compatibility alias for [BlueAiPalette]
+typedef BlueAIPalette = BlueAiPalette;

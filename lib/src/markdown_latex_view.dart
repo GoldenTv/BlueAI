@@ -4,13 +4,13 @@ import 'package:flutter_markdown_latex/flutter_markdown_latex.dart';
 import 'package:flutter_math_fork/flutter_math.dart';
 import 'package:markdown/markdown.dart' as md;
 
-import 'blueai_theme.dart';
+import 'blue_ai_theme.dart';
 import 'chat_widgets.dart';
 
 /// ตัวประมวลผลไวยากรณ์ LaTeX แบบ Inline และ Block สำหรับ Markdown
 /// ป้องกันปัญหา Delimiter สับสนกับตัวหนา (Bold), วงเล็บ หรือสัญลักษณ์พิเศษ
-class BlueLatexInlineSyntax extends md.InlineSyntax {
-  BlueLatexInlineSyntax()
+class LatexInlineSyntax extends md.InlineSyntax {
+  LatexInlineSyntax()
     : super(
         r'(?:\$\$((?:\\\$|[^\$])+?)\$\$)|'
         r'(?:\$((?!\s)(?:\\\$|[^\$\n])+?(?<!\s))\$)|'
@@ -55,8 +55,8 @@ class BlueLatexInlineSyntax extends md.InlineSyntax {
 
 /// Element Builder สำหรับแสดงผลสูตรคณิตศาสตร์ด้วย FlutterMath
 /// ป้องกัน Text Overflow ด้วย SingleChildScrollView แนวนอน และมี Fallback สวยงามหากสูตรผิดไวยากรณ์
-class BlueLatexElementBuilder extends MarkdownElementBuilder {
-  BlueLatexElementBuilder({this.textStyle, this.textScaleFactor});
+class LatexElementBuilder extends MarkdownElementBuilder {
+  LatexElementBuilder({this.textStyle, this.textScaleFactor});
 
   final TextStyle? textStyle;
   final double? textScaleFactor;
@@ -116,7 +116,7 @@ class _ContentBlock {
   final bool isClosed;
 }
 
-/// คอมโพเนนต์สำหรับแสดงผล Markdown พร้อมสูตรคณิตศาสตร์ LaTeX และ BlueCodeBox
+/// คอมโพเนนต์สำหรับแสดงผล Markdown พร้อมสูตรคณิตศาสตร์ LaTeX และ CodeSnippetBox
 /// รองรับ Incremental Block-Based Parsing เพื่อความลื่นไหลระดับ 60/120 FPS ขณะสตรีมมิ่ง
 class MarkdownLatexView extends StatefulWidget {
   const MarkdownLatexView({
@@ -141,7 +141,7 @@ class _MarkdownLatexViewState extends State<MarkdownLatexView> {
       ...md.ExtensionSet.gitHubFlavored.blockSyntaxes,
     ],
     <md.InlineSyntax>[
-      BlueLatexInlineSyntax(),
+      LatexInlineSyntax(),
       ...md.ExtensionSet.gitHubFlavored.inlineSyntaxes,
     ],
   );
@@ -536,15 +536,15 @@ class _MarkdownLatexViewState extends State<MarkdownLatexView> {
           final Widget w = _completedBlockCache.putIfAbsent(
             cacheKey,
             () => RepaintBoundary(
-              child: BlueCodeBox(code: block.content, language: block.language),
+              child: CodeSnippetBox(code: block.content, language: block.language),
             ),
           );
           widgets.add(w);
         } else {
-          // โค้ดที่กำลังสตรีมอยู่: แสดงผลเป็น BlueCodeBox ทันทีตั้งแต่เริ่มพิมพ์
+          // โค้ดที่กำลังสตรีมอยู่: แสดงผลเป็น CodeSnippetBox ทันทีตั้งแต่เริ่มพิมพ์
           widgets.add(
             RepaintBoundary(
-              child: BlueCodeBox(code: block.content, language: block.language),
+              child: CodeSnippetBox(code: block.content, language: block.language),
             ),
           );
         }
@@ -639,7 +639,7 @@ class _MarkdownLatexViewState extends State<MarkdownLatexView> {
         );
       },
       builders: <String, MarkdownElementBuilder>{
-        'latex': BlueLatexElementBuilder(textStyle: defaultStyle),
+        'latex': LatexElementBuilder(textStyle: defaultStyle),
       },
       extensionSet: _latexExtensionSet,
       styleSheet: _getStyleSheet(context, defaultStyle, isDark),

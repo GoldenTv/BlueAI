@@ -6,7 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('expanded thinking updates while still thinking and stays open for answer', (tester) async {
     Widget view(String text, bool thinking) => MaterialApp(
-      home: Scaffold(body: ThinkingIndicatorWidget(
+      home: Scaffold(body: ThinkingIndicator(
         isThinking: thinking, thinkingSeconds: 3, reasoningText: text,
       )),
     );
@@ -22,14 +22,14 @@ void main() {
     expect(find.text('first second'), findsOneWidget);
     expect(find.text('คิด 3 วิ'), findsOneWidget);
   });
-  group('ThinkingIndicatorWidget Tests', () {
+  group('ThinkingIndicator Tests', () {
     testWidgets('displays collapsed "คิด 4 วิ >" matching Image 1', (
       WidgetTester tester,
     ) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ThinkingIndicatorWidget(
+            body: ThinkingIndicator(
               isThinking: false,
               thinkingSeconds: 4,
               reasoningText: '- We need to generate C++ code for sorting.\n\nMake sure the code compiles.',
@@ -57,7 +57,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
-              body: ThinkingIndicatorWidget(
+              body: ThinkingIndicator(
                 isThinking: false,
                 thinkingSeconds: 4,
                 reasoningText: sampleReasoning,
@@ -107,7 +107,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
-              body: ThinkingIndicatorWidget(
+              body: ThinkingIndicator(
                 isThinking: true,
                 thinkingSeconds: 3,
                 reasoningText: 'Analyzing problem...',
@@ -128,7 +128,7 @@ void main() {
       await tester.pumpWidget(
         const MaterialApp(
           home: Scaffold(
-            body: ThinkingIndicatorWidget(
+            body: ThinkingIndicator(
               isThinking: false,
               thinkingSeconds: 1,
               reasoningText: 'Quick thought.',
@@ -146,7 +146,7 @@ void main() {
         await tester.pumpWidget(
           const MaterialApp(
             home: Scaffold(
-              body: ThinkingIndicatorWidget(
+              body: ThinkingIndicator(
                 isThinking: false,
                 thinkingSeconds: 2,
                 reasoningText: null,

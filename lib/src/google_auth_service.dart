@@ -5,7 +5,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 bool get usesNativeGoogleSignIn =>
     !kIsWeb && defaultTargetPlatform == TargetPlatform.android;
 
-class GoogleAuth {
+class GoogleAuthService {
   static Future<void>? _initialization;
 
   static Future<void> _initialize() async {

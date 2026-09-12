@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
-import 'blueai_theme.dart';
+import 'blue_ai_theme.dart';
 import 'chat_composer.dart';
 import 'chat_controller.dart';
 import 'chat_widgets.dart';
@@ -461,7 +461,7 @@ class _ChatPageState extends State<ChatPage> {
                         if (_cloud != null) _controller,
                       ]),
                       builder: (BuildContext context, Widget? child) {
-                        return Composer(
+                        return ChatComposer(
                           controller: _messageController,
                           focusNode: _messageFocusNode,
                           selectedModel: _controller.selectedModel,
@@ -682,7 +682,7 @@ class _ChatPageState extends State<ChatPage> {
                 if (index == messages.length && showThinkingRow) {
                   return Padding(
                     padding: const EdgeInsets.only(top: 4, bottom: 8),
-                    child: ThinkingIndicatorWidget(
+                    child: ThinkingIndicator(
                       isThinking: true,
                       thinkingSeconds: _controller.currentThinkingSeconds,
                     ),
@@ -782,7 +782,7 @@ class _ChatPageState extends State<ChatPage> {
                     children: <Widget>[
                       // แถบสถานะคิด (ขณะคิดสด หรือเมื่อคิดเสร็จแล้ว)
                       if (isThinkingPhase)
-                        ThinkingIndicatorWidget(
+                        ThinkingIndicator(
                           isThinking: true,
                           thinkingSeconds:
                               _controller.currentThinkingSeconds > 0
@@ -792,7 +792,7 @@ class _ChatPageState extends State<ChatPage> {
                         )
                       else if (message.reasoningText != null &&
                           message.reasoningText!.trim().isNotEmpty)
-                        ThinkingIndicatorWidget(
+                        ThinkingIndicator(
                           isThinking: false,
                           thinkingSeconds: message.thinkingDurationSeconds,
                           reasoningText: message.reasoningText,

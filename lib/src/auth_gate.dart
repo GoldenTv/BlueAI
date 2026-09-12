@@ -8,7 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'api_key_store.dart';
 import 'auth_session.dart';
-import 'google_auth.dart';
+import 'google_auth_service.dart';
 import 'chat_controller.dart';
 import 'chat_page.dart';
 import 'cloud_chat_controller.dart';
@@ -74,7 +74,7 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
     });
     try {
       if (usesNativeGoogleSignIn) {
-        await GoogleAuth.signIn(widget.client);
+        await GoogleAuthService.signIn(widget.client);
         return;
       }
       final launched = await widget.client.auth.signInWithOAuth(
@@ -113,7 +113,7 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     final user = widget.client.auth.currentUser;
     if (user != null) {
-      return AccountChat(
+      return AuthenticatedChatScreen(
         key: ValueKey(user.id),
         client: widget.client,
         user: user,
@@ -168,15 +168,15 @@ class _AuthGateState extends State<AuthGate> with WidgetsBindingObserver {
   }
 }
 
-class AccountChat extends StatefulWidget {
-  const AccountChat({required this.client, required this.user, super.key});
+class AuthenticatedChatScreen extends StatefulWidget {
+  const AuthenticatedChatScreen({required this.client, required this.user, super.key});
   final SupabaseClient client;
   final User user;
   @override
-  State<AccountChat> createState() => _AccountChatState();
+  State<AuthenticatedChatScreen> createState() => _AuthenticatedChatScreenState();
 }
 
-class _AccountChatState extends State<AccountChat> with WidgetsBindingObserver {
+class _AuthenticatedChatScreenState extends State<AuthenticatedChatScreen> with WidgetsBindingObserver {
   late final CloudChatController _controller;
   bool _signingOut = false;
   @override
@@ -301,8 +301,8 @@ class _AccountChatState extends State<AccountChat> with WidgetsBindingObserver {
         );
 }
 
-class ConfigurationPage extends StatelessWidget {
-  const ConfigurationPage({this.error, super.key});
+class MissingConfigurationScreen extends StatelessWidget {
+  const MissingConfigurationScreen({this.error, super.key});
   final String? error;
   @override
   Widget build(BuildContext context) => Scaffold(

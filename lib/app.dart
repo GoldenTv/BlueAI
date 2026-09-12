@@ -3,7 +3,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'src/auth_gate.dart';
 
-import 'src/blueai_theme.dart';
+import 'src/blue_ai_theme.dart';
 import 'src/chat_controller.dart';
 import 'src/chat_page.dart';
 
@@ -23,15 +23,15 @@ class BlueApp extends StatefulWidget {
     useMaterial3: true,
     brightness: Brightness.light,
     colorScheme: const ColorScheme.light(
-      primary: BlueAIPalette.accentDeep,
+      primary: BlueAiPalette.accentDeep,
       onPrimary: Colors.white,
       surface: Colors.white,
-      onSurface: BlueAIPalette.lightText,
-      secondary: BlueAIPalette.lightTextSecondary,
-      secondaryContainer: BlueAIPalette.lightTint,
-      onSecondaryContainer: BlueAIPalette.lightText,
+      onSurface: BlueAiPalette.lightText,
+      secondary: BlueAiPalette.lightTextSecondary,
+      secondaryContainer: BlueAiPalette.lightTint,
+      onSecondaryContainer: BlueAiPalette.lightText,
       surfaceTint: Colors.transparent,
-      outline: BlueAIPalette.lightBorder,
+      outline: BlueAiPalette.lightBorder,
     ),
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: const AppBarTheme(
@@ -43,12 +43,12 @@ class BlueApp extends StatefulWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: BlueAIPalette.lightBorder),
+        side: const BorderSide(color: BlueAiPalette.lightBorder),
       ),
       color: Colors.white,
     ),
     dividerTheme: const DividerThemeData(
-      color: BlueAIPalette.lightBorder,
+      color: BlueAiPalette.lightBorder,
       thickness: 1,
     ),
   );
@@ -57,17 +57,17 @@ class BlueApp extends StatefulWidget {
     useMaterial3: true,
     brightness: Brightness.dark,
     colorScheme: const ColorScheme.dark(
-      primary: BlueAIPalette.accent,
+      primary: BlueAiPalette.accent,
       onPrimary: Colors.white,
-      surface: BlueAIPalette.darkSurface,
-      onSurface: BlueAIPalette.darkText,
-      secondary: BlueAIPalette.darkTextSecondary,
-      secondaryContainer: BlueAIPalette.darkTint,
-      onSecondaryContainer: BlueAIPalette.darkText,
+      surface: BlueAiPalette.darkSurface,
+      onSurface: BlueAiPalette.darkText,
+      secondary: BlueAiPalette.darkTextSecondary,
+      secondaryContainer: BlueAiPalette.darkTint,
+      onSecondaryContainer: BlueAiPalette.darkText,
       surfaceTint: Colors.transparent,
-      outline: BlueAIPalette.darkBorder,
+      outline: BlueAiPalette.darkBorder,
     ),
-    scaffoldBackgroundColor: BlueAIPalette.darkBackground,
+    scaffoldBackgroundColor: BlueAiPalette.darkBackground,
     appBarTheme: const AppBarTheme(
       backgroundColor: Colors.transparent,
       surfaceTintColor: Colors.transparent,
@@ -77,12 +77,12 @@ class BlueApp extends StatefulWidget {
       elevation: 0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
-        side: const BorderSide(color: BlueAIPalette.darkBorder),
+        side: const BorderSide(color: BlueAiPalette.darkBorder),
       ),
-      color: BlueAIPalette.darkSurface,
+      color: BlueAiPalette.darkSurface,
     ),
     dividerTheme: const DividerThemeData(
-      color: BlueAIPalette.darkBorder,
+      color: BlueAiPalette.darkBorder,
       thickness: 1,
     ),
   );
@@ -134,7 +134,7 @@ class _BlueAppState extends State<BlueApp> {
                   ? ChatPage(controller: _controller)
                   : widget.supabaseClient != null
                   ? AuthGate(client: widget.supabaseClient!)
-                  : ConfigurationPage(error: widget.configurationError),
+                  : MissingConfigurationScreen(error: widget.configurationError),
             );
           },
     );

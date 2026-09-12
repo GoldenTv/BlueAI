@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 /// Plain message composer with model selection and send/stop controls.
-class Composer extends StatefulWidget {
-  const Composer({
+class ChatComposer extends StatefulWidget {
+  const ChatComposer({
     required this.controller,
     required this.focusNode,
     required this.selectedModel,
@@ -28,10 +28,10 @@ class Composer extends StatefulWidget {
   final bool sendEnabled;
 
   @override
-  State<Composer> createState() => _ComposerState();
+  State<ChatComposer> createState() => _ChatComposerState();
 }
 
-class _ComposerState extends State<Composer> {
+class _ChatComposerState extends State<ChatComposer> {
   @override
   void initState() {
     super.initState();

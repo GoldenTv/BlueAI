@@ -30,8 +30,15 @@ migrate_working_dir/
 .flutter-plugins-dependencies
 .pub-cache/
 .pub/
+# Build and generated artifacts
 /build/
+**/build/
 /coverage/
+
+# Screenshots
+[sS]creen[sS]hot/
+[sS]creen[sS]hots/
+ScreenShot/
 
 # Secrets and local environment variables (never commit; *.example templates stay tracked)
 config/*.json
@@ -46,6 +53,7 @@ config/*.json
 
 # Node / backend
 node_modules/
+**/.wrangler/
 
 # Symbolication related
 app.*.symbols
@@ -57,6 +65,14 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+**/android/local.properties
+*.keystore
+*.jks
+key.properties
+
+# OS junk
+Thumbs.db
+desktop.ini
 
 # Widget Preview related
 .widget_preview/

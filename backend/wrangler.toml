@@ -1,0 +1,12 @@
+name = "blueai-backend"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+compatibility_flags = [ "nodejs_compat" ]
+
+[vars]
+AI_BASE_URL = "https://ai.psu.blue/v1"
+AI_MODEL = "openai/gpt-5.6-luna"
+# Set these before deploying; .dev.vars is local-only.
+# SUPABASE_URL = "https://YOUR_PROJECT.supabase.co"
+# SUPABASE_PUBLISHABLE_KEY = "sb_publishable_REPLACE_ME"
+# ALLOWED_ORIGINS = "https://your-web-app.example"

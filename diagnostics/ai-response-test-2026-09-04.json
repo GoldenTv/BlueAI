@@ -1,0 +1,136 @@
+{
+  "testedAt": "2026-09-04T14:31:05.792Z",
+  "purpose": "ตรวจสอบข้อความตอบกลับ, token usage, finish reason และ rate-limit metadata",
+  "secrets": "ไม่รวม API key และไม่รวม request headers/body ที่อาจมีข้อมูลลับ",
+  "provider": {
+    "baseUrl": "https://ai.psu.blue/v1",
+    "model": "openai/gpt-5.6-luna",
+    "prompt": "ตอบคำว่า OK เพียงคำเดียวเพื่อทดสอบระบบ",
+    "maxTokens": 32
+  },
+  "tests": {
+    "currentBackendConfiguration": {
+      "compatibility": "compatible",
+      "elapsedMs": 1601,
+      "streamChunkCount": 1,
+      "rawStreamText": "OK",
+      "usage": {
+        "promptTokens": null,
+        "completionTokens": null,
+        "totalTokens": null
+      },
+      "finishReason": "stop",
+      "response": {
+        "id": "chatcmpl-19knDLPROHfcFgfZNrsOF",
+        "modelId": "openai/gpt-5.6-luna",
+        "timestamp": "2026-09-04T14:29:59.000Z",
+        "rateLimitHeaders": {}
+      },
+      "warnings": [
+        {
+          "type": "unsupported-setting",
+          "setting": "temperature",
+          "details": "temperature is not supported for reasoning models"
+        }
+      ],
+      "providerMetadata": {
+        "openai": {}
+      }
+    },
+    "diagnosticStrictConfiguration": {
+      "compatibility": "strict",
+      "elapsedMs": 1564,
+      "streamChunkCount": 1,
+      "rawStreamText": "OK",
+      "usage": {
+        "promptTokens": 19,
+        "completionTokens": 5,
+        "totalTokens": 24
+      },
+      "finishReason": "stop",
+      "response": {
+        "id": "chatcmpl-NZinczqTjukrQOtBB2yJP",
+        "modelId": "openai/gpt-5.6-luna",
+        "timestamp": "2026-09-04T14:31:05.000Z",
+        "rateLimitHeaders": {}
+      },
+      "warnings": [
+        {
+          "type": "unsupported-setting",
+          "setting": "temperature",
+          "details": "temperature is not supported for reasoning models"
+        }
+      ],
+      "providerMetadata": {
+        "openai": {}
+      }
+    }
+  },
+  "applicationEndpointTest": {
+    "url": "https://blueai-backend.workers.dev",
+    "status": null,
+    "body": null,
+    "error": "DNS resolution failed during test: No such host is known"
+  },
+  "modelsEndpointTest": {
+    "url": "https://ai.psu.blue/v1/models",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "modelCount": 10,
+    "modelIds": [
+      "deepseek/deepseek-chat",
+      "openai/gpt-4o-mini",
+      "qwen/qwen3.6-plus",
+      "qwen/qwen3.6-flash",
+      "qwen/qwen3.6-27b",
+      "z-ai/glm-5",
+      "qwen/qwen3.7-plus",
+      "openai/gpt-5.6-luna",
+      "deepseek/deepseek-v4-flash-0731",
+      "PSU-LLM/psu-gemma"
+    ],
+    "rateLimitHeaders": {}
+  },
+  "rawOpenAiCompatibleChatTest": {
+    "testedAt": "2026-09-04T14:42:05Z",
+    "request": {
+      "stream": true,
+      "streamOptionsIncludeUsage": true,
+      "maxTokens": 32
+    },
+    "status": 200,
+    "contentType": "text/event-stream",
+    "responseHeaders": {
+      "access-control-allow-origin": "*",
+      "cache-control": "no-cache",
+      "connection": "keep-alive",
+      "content-encoding": "br",
+      "content-type": "text/event-stream",
+      "date": "Fri, 04 Sep 2026 14:42:05 GMT",
+      "server": "nginx",
+      "strict-transport-security": "max-age=31536000; includeSubDomains",
+      "transfer-encoding": "chunked",
+      "vary": "Accept-Encoding",
+      "x-robots-tag": "noindex"
+    },
+    "limitHeaders": {},
+    "usageEvent": {
+      "prompt_tokens": 19,
+      "completion_tokens": 5,
+      "total_tokens": 24
+    },
+    "finishReason": "stop",
+    "responseModel": "openai/gpt-5.6-luna",
+    "responseText": "OK"
+  },
+  "conclusion": [
+    "Gateway ตอบข้อความได้ตามปกติและจบด้วย finishReason=stop",
+    "โค้ด backend ปัจจุบันส่งออกเป็น text stream จึงไม่มี token metadata ให้ Flutter อ่าน",
+    "เมื่อใช้ compatibility=compatible รอบทดสอบนี้ได้ usage เป็น null",
+    "เมื่อทดสอบ compatibility=strict ได้ usage 19 input + 5 output = 24 tokens",
+    "ไม่พบ rate-limit headers จาก gateway ในทั้งสองรอบ จึงยังสรุป quota/limit ของบัญชีไม่ได้",
+    "GET /models ใช้งานได้และพบ 10 models แต่ไม่ได้ให้ข้อมูล quota/limit",
+    "raw chat ที่ส่ง stream_options.include_usage=true ได้ usage ใน SSE final chunk แต่ยังไม่มี rate-limit headers",
+    "ควรเพิ่ม usage และ finish metadata ลง data stream หรือ response envelope และกำหนด max output tokens ให้ชัดเจน"
+  ]
+}
